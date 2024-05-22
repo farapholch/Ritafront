@@ -20,7 +20,7 @@ import {
   decryptData,
 } from "../../packages/excalidraw/data/encryption";
 import { MIME_TYPES } from "../../packages/excalidraw/constants";
-import type { SyncableExcalidrawElement } from ".";
+import { SyncableExcalidrawElement } from ".";
 import { getSyncableElements } from ".";
 import type { ResolutionType } from "../../packages/excalidraw/utility-types";
 import type { Socket } from "socket.io-client";
@@ -116,7 +116,7 @@ interface FirebaseStoredScene {
   ciphertext: firebase.default.firestore.Blob;
 }
 
-const encryptElements = async (
+export const encryptElements = async (
   key: string,
   elements: readonly ExcalidrawElement[],
 ): Promise<{ ciphertext: ArrayBuffer; iv: Uint8Array }> => {
@@ -127,7 +127,7 @@ const encryptElements = async (
   return { ciphertext: encryptedBuffer, iv };
 };
 
-const decryptElements = async (
+export const decryptElements = async (
   data: FirebaseStoredScene,
   roomKey: string,
 ): Promise<readonly ExcalidrawElement[]> => {
@@ -204,7 +204,7 @@ export const saveFilesToFirebase = async ({
   return { savedFiles, erroredFiles };
 };
 
-const createFirebaseSceneDocument = async (
+export const createFirebaseSceneDocument = async (
   firebase: ResolutionType<typeof loadFirestore>,
   elements: readonly SyncableExcalidrawElement[],
   roomKey: string,

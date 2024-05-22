@@ -52,6 +52,7 @@ import {
   saveFilesToFirebase,
   saveToFirebase,
 } from "../data/firebase";
+import { getStorageBackend, storageBackend } from "../../packages/excalidraw/data/config";
 import {
   importUsernameFromLocalStorage,
   saveUsernameToLocalStorage,
